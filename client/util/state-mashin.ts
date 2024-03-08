@@ -1,5 +1,4 @@
 import CloseState from "../states/close-state";
-import OpenState from "../states/open-state";
 import State from "../states/state";
 
 
