@@ -8,7 +8,7 @@ class HelperRequest{
     }
 
     addRequestInterceptor(onFulfilled?: (value: any) => any, onRejected?: (error: any) => any): void{
-        this.instance.interceptors.request.use(onFulfilled,onRejected);
+        this.instance.interceptors.response.use()
     }
 
     addResponceInterceptor(onFulfilled?: (value: any) => any, onRejected?: (error: any) => any): void{
