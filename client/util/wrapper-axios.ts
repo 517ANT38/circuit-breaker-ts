@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, CreateAxiosDefaults } from "axios";
+import axios, { AxiosInstance } from "axios";
 import { ClientRequest } from "./util";
 
 
@@ -6,7 +6,7 @@ export default class WrapperAxios implements ClientRequest{
 
     private wrap_axios: AxiosInstance;
 
-    constructor(config?:CreateAxiosDefaults){
+    constructor(config?:object){
         this.wrap_axios = axios.create(config);
     }
 
