@@ -1,7 +1,8 @@
-import axios, { AxiosInstance, AxiosRequestConfig, CreateAxiosDefaults } from "axios";
+import axios, { AxiosInstance, CreateAxiosDefaults } from "axios";
+import { ClientRequest } from "./util";
 
 
-export default class WrapperAxios{
+export default class WrapperAxios implements ClientRequest{
 
     private wrap_axios: AxiosInstance;
 
@@ -9,7 +10,7 @@ export default class WrapperAxios{
         this.wrap_axios = axios.create(config);
     }
 
-    public request(url:string,method?:string,data?:any,config?:AxiosRequestConfig){
+    public request(url:string,method?:string,data?:any,config?:object){
         
         return this.wrap_axios({
             url:url,
@@ -19,6 +20,13 @@ export default class WrapperAxios{
         });
     }
 
+    addOnRequest(onFulfilled?: (value: any) => any, onRejected?: (error: any) => any){
+        this.wrap_axios.interceptors.response.use(onFulfilled,onRejected);
+    }
+
+    addOnResponce(onFulfilled?: (value: any) => any, onRejected?: (error: any) => any): void{
+        this.wrap_axios.interceptors.response.use(onFulfilled,onRejected);
+    }
  
 
    
