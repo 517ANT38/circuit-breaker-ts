@@ -1,5 +1,3 @@
-import { AxiosResponse } from "axios";
-
 export type objOpts = { interval: number; maxCountFail: number; };
 
 export interface RequestObj<T>{
