@@ -1,8 +1,8 @@
-import axios, { AxiosInstance } from "axios";
+import axios, { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from "axios";
 import { ClientRequest } from "./util";
 
 
-export default class WrapperAxios implements ClientRequest{
+export default class WrapperAxios implements ClientRequest<AxiosResponse,InternalAxiosRequestConfig>{
 
     private wrap_axios: AxiosInstance;
 
@@ -20,11 +20,11 @@ export default class WrapperAxios implements ClientRequest{
         });
     }
 
-    addOnRequest(onFulfilled?: (value: any) => any, onRejected?: (error: any) => any){
-        this.wrap_axios.interceptors.response.use(onFulfilled,onRejected);
+    addOnRequest(onFulfilled?: (value: InternalAxiosRequestConfig) => InternalAxiosRequestConfig, onRejected?: (error: any) => any){
+        this.wrap_axios.interceptors.request.use(onFulfilled,onRejected);
     }
 
-    addOnResponce(onFulfilled?: (value: any) => any, onRejected?: (error: any) => any): void{
+    addOnResponce(onFulfilled?: (value: AxiosResponse) => AxiosResponse, onRejected?: (error: any) => any): void{
         this.wrap_axios.interceptors.response.use(onFulfilled,onRejected);
     }
  
