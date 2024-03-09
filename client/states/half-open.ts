@@ -6,19 +6,30 @@ import State from "./state";
 export default class HalfOpenState implements State{
     
     private flag = false;
-    opts: objOpts;
-    constructor(opts:objOpts){
-        this.opts = opts;
+    private closeState:State;
+    
+    
+    
+    
+    constructor(state:State){
+        this.closeState = state;
     }
 
+    get opts() : objOpts {
+        return this.closeState.opts;
+    }
+
+
     change(): State {
+        let tmp = this.closeState;
         if(this.flag){
-            return new OpenState(this.opts)
+            tmp = new OpenState(this);
         }
-        return new CloseState(this.opts);
+        this.flag = false;
+        return tmp;
     }
     incrementCountFail(): void {
-        this.flag= true;
+        this.flag = true;
     }
    
     isCallPermitted(): boolean {

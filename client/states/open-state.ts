@@ -4,20 +4,26 @@ import State from "./state";
 
 export default class OpenState implements State{
     
-    private readonly opentime_at=Date.now();
-    opts: objOpts;
-    constructor(opts:objOpts){
-        this.opts = opts;
+    private readonly opentimeAt=Date.now();
+    private halfOpenState: State;
+   
+    constructor(state:State){
+        
+        this.halfOpenState = state;
     }   
+
+    get opts() : objOpts {
+        return this.halfOpenState.opts;
+    }
 
     isCallPermitted(): boolean {
         return false;
     }
 
     change(): State {
-        
-        if (Math.abs(this.opentime_at - Date.now())>=this.opts.interval) {
-            return new HalfOpenState(this.opts);
+        let {interval} = this.halfOpenState.opts;
+        if (Math.abs(this.opentimeAt - Date.now())>=interval) {
+            return this.halfOpenState;
         }
         return this;
     }
