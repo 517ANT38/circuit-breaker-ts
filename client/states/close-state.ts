@@ -19,13 +19,15 @@ export default class CloseState implements State{
         this._opts = opts;
     }
 
-    get opts() : objOpts {
+    get opts(){
         return this._opts;
     }
+
     change(): State {
-       if (this.countFail >= this.opts.maxCountFail) {
+       let {interval,maxCountFail} = this._opts;
+       if (this.countFail >= maxCountFail) {
             this.countFail = 0;
-            return new OpenState(this.halfState);
+            return new OpenState(interval,this.halfState);
        }
        return this;
     }
