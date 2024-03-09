@@ -24,13 +24,13 @@ app.get(ENDPOINT,(req,res)=>{
 app.post(ENDPOINT,(req,res)=>{
     halding(res,req.body)
 })
-export default function startServer(host="localhost",port=9797){
+export default function startServer(port=9797){
     setTimeout(function change(){
         errorOrSuccess = Math.abs(errorOrSuccess - 1);
         setTimeout(change,Math.random()*DELAY)
     },Math.random()*DELAY);
 
-    app.listen(port,host, () => {
+    app.listen(port, () => {
         console.log(`Server is running on http://${host}:${port}${ENDPOINT}`);
     });
 }
