@@ -5,10 +5,11 @@ const ENDPOINT = "/app";
 const ERRS = [500,502,503,504,508]
 let errorOrSuccess = Math.random();
 
+app.use(express.json());
 
-const halding = (res:Response<any, any>,s="Success req")=>{
+const halding = (res:Response<any, any>,data?:{msg?:string})=>{
     if (errorOrSuccess < 0.5) {
-        res.status(200).json({msg:s});
+        res.status(200).json({msg:data?.msg});
     } else {
         let index = Math.floor(Math.random()*(ERRS.length));
         res.status(ERRS[index]);        
@@ -18,7 +19,7 @@ const halding = (res:Response<any, any>,s="Success req")=>{
 }
 
 app.get(ENDPOINT,(req,res)=>{
-    halding(res);
+    halding(res,{msg:"Request success"});
 });
 app.post(ENDPOINT,(req,res)=>{
     halding(res,req.body)
