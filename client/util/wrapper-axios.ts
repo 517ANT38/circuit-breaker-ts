@@ -1,5 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse, InternalAxiosRequestConfig } from "axios";
-import { ClientRequest } from "./util";
+import { ClientRequest } from "./requests";
 
 
 export default class WrapperAxios implements ClientRequest<AxiosResponse,InternalAxiosRequestConfig>{
