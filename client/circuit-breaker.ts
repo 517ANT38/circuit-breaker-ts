@@ -14,7 +14,10 @@ export default class CircuitBreaker<T,D> implements RequestObj<T>{
         });
     }
     request(url: string, method?: string, data?: any, config?: object): Promise<T> {
-        return this.client.request(url,method,data,config);
+        if(this.stateMashin.isCallPermitted()){
+            return this.client.request(url,method,data,config);
+        }
+        return Promise.reject(new Error("Circuit breaker is open"));
     }
 
    
