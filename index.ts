@@ -17,7 +17,8 @@ const cb = new CircuitBreaker(axios);
         }catch(e){
             console.log(e)
         }
+        await new Promise(resolve => setTimeout(resolve, DELAY));
     }
-    await new Promise(resolve => setTimeout(resolve, DELAY));
+    
 })();
 
