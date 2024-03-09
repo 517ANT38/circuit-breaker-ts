@@ -31,6 +31,6 @@ export default function startServer(port=9797){
     },Math.random()*DELAY);
 
     app.listen(port, () => {
-        console.log(`Server is running on http://${host}:${port}${ENDPOINT}`);
+        console.log(`Server is running on http://localhost:${port}${ENDPOINT}`);
     });
 }
