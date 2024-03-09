@@ -10,7 +10,7 @@ export default class WrapperAxios implements ClientRequest<AxiosResponse,Interna
         this.wrap_axios = axios.create(config);
     }
 
-    public request(url:string,method?:string,data?:any,config?:object){
+    request(url:string,method?:string,data?:any,config?:object){
         
         return this.wrap_axios({
             url:url,
