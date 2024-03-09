@@ -8,11 +8,11 @@ export default class CircuitBreaker<T extends StatusResponce,D> implements Reque
     constructor(client:ClientRequest<T,D>,interval=1000, maxCountFail=3){
         this.client = client;
         this.stateMashin = new StateMashin(interval,maxCountFail);
-        this.client.addOnResponce((v)=>{
-            if(v.status >= 500){
+        this.client.addOnResponce((ans)=>{
+            if(ans.status >= 500){
                 this.stateMashin.incrementCountFail()
             }
-            return v;
+            return ans;
         },(e)=>{
             this.stateMashin.incrementCountFail()
             return e;
