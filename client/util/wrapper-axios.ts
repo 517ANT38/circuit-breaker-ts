@@ -7,7 +7,7 @@ export default class WrapperAxios implements ClientRequest<AxiosResponse,Interna
     private wrap_axios: AxiosInstance;
 
     constructor(config?:object){
-        this.wrap_axios = axios.create(config);
+        this.wrap_axios = axios.create({validateStatus: (s:number)=> true,...config});
     }
 
     request(url:string,method?:string,data?:any,config?:object){

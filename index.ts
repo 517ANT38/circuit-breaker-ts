@@ -5,7 +5,7 @@ const URL = "http://localhost:9797/app";
 const DELAY = 3000;
 startServer();
 
-const axios = new WrapperAxios({validateStatus: (s:number)=> true});
+const axios = new WrapperAxios();
 const cb = new CircuitBreaker(axios,5000);
 (async ()=>{
     for (let index = 0; index < 100; index++) {
