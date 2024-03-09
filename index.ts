@@ -2,6 +2,7 @@ import CircuitBreaker from "./client/circuit-breaker";
 import WrapperAxios from "./client/util/wrapper-axios";
 import startServer from "./server/server";
 const URL = "http://localhost:9797/app";
+const DELAY = 3000;
 startServer();
 
 const axios = new WrapperAxios({
@@ -17,5 +18,6 @@ const cb = new CircuitBreaker(axios);
             console.log(e)
         }
     }
+    await new Promise(resolve => setTimeout(resolve, DELAY));
 })();
 
