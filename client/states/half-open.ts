@@ -1,4 +1,3 @@
-import { objOpts } from "../util/util";
 import CloseState from "./close-state";
 import OpenState from "./open-state";
 import State from "./state";

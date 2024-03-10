@@ -1,5 +1,3 @@
-import { objOpts } from "../util/util";
-import HalfOpenState from "./half-open";
 import State from "./state";
 
 export default class OpenState implements State{
