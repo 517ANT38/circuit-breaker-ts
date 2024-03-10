@@ -3,15 +3,12 @@ import HalfOpenState from "./half-open";
 import OpenState from "./open-state";
 import State from "./state";
 
-export default class CloseState implements State{
+class CloseState implements State{
     
     
     private halfState:State;
     private countFail = 0;
-    private _opts:objOpts;
-
-    
-    
+    private _opts:objOpts;  
     
 
     constructor(opts:objOpts){
@@ -38,3 +35,5 @@ export default class CloseState implements State{
         return true;
     }
 }
+
+export default CloseState;

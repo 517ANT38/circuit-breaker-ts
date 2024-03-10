@@ -6,7 +6,7 @@ import { haldingErr, haldingErrAny, haldingReq, haldingRes } from "./util";
 interface WrapInterfaceAxios 
     extends ClientRequest<AxiosResponse,AxiosRequestConfig,unknown,InternalAxiosRequestConfig>{}
 
-export default class WrapperAxios implements WrapInterfaceAxios{
+class WrapperAxios implements WrapInterfaceAxios{
 
     private wrap_axios: AxiosInstance;
 
@@ -35,3 +35,4 @@ export default class WrapperAxios implements WrapInterfaceAxios{
 
    
 }
+export default WrapperAxios;

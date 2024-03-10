@@ -1,8 +1,7 @@
 import StateMashin from "./util/state-mashin";
-import { ClientRequest, ErrorRequest, RequestObj, StatusResponce } from "./util/requests";
+import { ClientRequest, ErrorRequest, RequestObj} from "./util/requests";
 
-export default class CircuitBreaker<Res extends StatusResponce,Data = any,Conf = object>
-    implements RequestObj<Res,Data,Conf>{ 
+class CircuitBreaker<Res = any,Data = any,Conf = object>  implements RequestObj<Res,Data,Conf>{ 
     
     private stateMashin:StateMashin;
     private client:ClientRequest<Res,Conf,Data>;
@@ -34,3 +33,5 @@ export default class CircuitBreaker<Res extends StatusResponce,Data = any,Conf =
    
 
 }
+
+export default CircuitBreaker;

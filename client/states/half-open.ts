@@ -2,13 +2,10 @@ import CloseState from "./close-state";
 import OpenState from "./open-state";
 import State from "./state";
 
-export default class HalfOpenState implements State{
+class HalfOpenState implements State{
     
     private flag = false;
-    private closeState:CloseState;
-    
-    
-    
+    private closeState:CloseState;    
     
     constructor(state:CloseState){
         this.closeState = state;
@@ -34,3 +31,4 @@ export default class HalfOpenState implements State{
     }
 
 }
+export default HalfOpenState;

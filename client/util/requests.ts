@@ -9,7 +9,7 @@ export interface ErrorRequest{
     request:never
 }
 
-export interface RequestObj<Res extends StatusResponce,Data,Conf>{
+export interface RequestObj<Res,Data,Conf>{
     request(url:string,method?:string,data?:Data,config?:Conf):Promise<Res>
 }
 
@@ -18,5 +18,5 @@ export interface InterceptorForRequest<Res,Req>{
     addOnResponce(onFulfilled?: (value: Res) => Res, onRejected?: haldingErr): void;
 }
 
-export interface ClientRequest<Res extends StatusResponce,C = object,D = any,Req = any> extends RequestObj<Res,D,C>,
+export interface ClientRequest<Res,C = object,D = any,Req = any> extends RequestObj<Res,D,C>,
     InterceptorForRequest<Res,Req>{}

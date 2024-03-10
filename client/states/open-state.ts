@@ -1,6 +1,6 @@
 import State from "./state";
 
-export default class OpenState implements State{
+class OpenState implements State{
     
     private readonly opentimeAt=Date.now();
     private halfOpenState: State;
@@ -30,3 +30,4 @@ export default class OpenState implements State{
     }
 
 }
+export default OpenState;
