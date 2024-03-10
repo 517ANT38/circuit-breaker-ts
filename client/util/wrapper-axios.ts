@@ -11,7 +11,7 @@ export default class WrapperAxios implements WrapInterfaceAxios{
     private wrap_axios: AxiosInstance;
 
     constructor(config?:CreateAxiosDefaults){
-        this.wrap_axios = axios.create(config);
+        this.wrap_axios = axios.create({validateStatus: (s:number)=> s < 500,...config});
     }
 
     request(url:string,method?:string,data?:unknown,config?:AxiosRequestConfig){
