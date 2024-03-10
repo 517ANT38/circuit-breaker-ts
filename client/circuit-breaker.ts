@@ -1,7 +1,7 @@
 import StateMashin from "./util/state-mashin";
-import { ClientRequest, RequestObj, StatusResponce } from "./util/requests";
+import { ClientRequest, ErrorRequest, RequestObj, StatusResponce } from "./util/requests";
 
-export default class CircuitBreaker<Res extends StatusResponce,Data = any,Conf = object> 
+export default class CircuitBreaker<Res extends StatusResponce,Data = any,Conf = object>
     implements RequestObj<Res,Data,Conf>{ 
     
     private stateMashin:StateMashin;
@@ -10,15 +10,18 @@ export default class CircuitBreaker<Res extends StatusResponce,Data = any,Conf =
     constructor(client:ClientRequest<Res,Conf,Data>,interval=1000, maxCountFail=3){
         this.client = client;
         this.stateMashin = new StateMashin(interval,maxCountFail);
-        this.client.addOnResponce((ans)=>{
-            if(ans.status >= 500){
-                this.stateMashin.incrementCountFail()
-            }
-            return ans;
-        },(e)=>{
-            this.stateMashin.incrementCountFail()
-            return e;
-        });
+        this.client.addOnResponce(ans => ans,this.haldingError);
+    }
+
+
+    private haldingError = (e:ErrorRequest)=>{
+        if(!e.responce){
+            this.stateMashin.incrementCountFail();
+        }
+        else if(e.responce.status >= 500){
+            this.stateMashin.incrementCountFail();
+        }
+        return Promise.reject(e);
     }
 
     request(url: string, method?: string, data?: Data, config?: Conf): Promise<Res> {

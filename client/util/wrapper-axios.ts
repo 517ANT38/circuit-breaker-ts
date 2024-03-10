@@ -1,15 +1,17 @@
 import axios, { CreateAxiosDefaults, InternalAxiosRequestConfig } from "axios";
 import {AxiosInstance, AxiosRequestConfig, AxiosResponse} from "axios"
 import { ClientRequest } from "./requests";
+import { haldingErr, haldingErrAny, haldingReq, haldingRes } from "./util";
 
+interface WrapInterfaceAxios 
+    extends ClientRequest<AxiosResponse,AxiosRequestConfig,unknown,InternalAxiosRequestConfig>{}
 
-export default class WrapperAxios 
-    implements ClientRequest<AxiosResponse,AxiosRequestConfig,unknown,InternalAxiosRequestConfig>{
+export default class WrapperAxios implements WrapInterfaceAxios{
 
     private wrap_axios: AxiosInstance;
 
     constructor(config?:CreateAxiosDefaults){
-        this.wrap_axios = axios.create({validateStatus: (s:number)=> true,...config});
+        this.wrap_axios = axios.create(config);
     }
 
     request(url:string,method?:string,data?:unknown,config?:AxiosRequestConfig){
@@ -22,11 +24,11 @@ export default class WrapperAxios
         });
     }
 
-    addOnRequest(onFulfilled?: (value: InternalAxiosRequestConfig) => InternalAxiosRequestConfig, onRejected?: (error: any) => any){
+    addOnRequest(onFulfilled?: haldingReq, onRejected?: haldingErrAny){
         this.wrap_axios.interceptors.request.use(onFulfilled,onRejected);
     }
 
-    addOnResponce(onFulfilled?: (value: AxiosResponse) => AxiosResponse, onRejected?: (error: any) => any): void{
+    addOnResponce(onFulfilled?: haldingRes, onRejected?: haldingErr): void{
         this.wrap_axios.interceptors.response.use(onFulfilled,onRejected);
     }
  
