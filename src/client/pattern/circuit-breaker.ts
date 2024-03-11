@@ -1,5 +1,5 @@
-import StateMashin from "./util/state-mashin";
-import { ClientRequest, ErrorRequest, RequestObj} from "./util/requests";
+import StateMashin from "../util/state-mashin";
+import { ClientRequest, ErrorRequest, RequestObj} from "../util/requests";
 
 class CircuitBreaker<Res = any,Data = any,Conf = object>  implements RequestObj<Res,Data,Conf>{ 
     

@@ -1,12 +1,10 @@
-import CircuitBreaker from "./client/circuit-breaker";
-import WrapperAxios from "./client/util/wrapper-axios";
+
+import AxiosCircuitBreaker from "./client/pattern/axios-circuit-breaker";
 import startServer from "./server/server";
 const URL = "http://localhost:9797/app";
 const DELAY = 3000;
 startServer();
-
-const axios = new WrapperAxios();
-const cb = new CircuitBreaker(axios,5000);
+const cb = new AxiosCircuitBreaker(5000);
 (async ()=>{
     for (let index = 0; index < 100; index++) {
         try{
