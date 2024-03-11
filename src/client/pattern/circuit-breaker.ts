@@ -6,7 +6,7 @@ class CircuitBreaker<Res = any,Data = any,Conf = object>  implements RequestObj<
     private stateMashin:StateMashin;
     private client:ClientRequest<Res,Conf,Data>;
 
-    constructor(client:ClientRequest<Res,Conf,Data>,interval=1000, maxCountFail=3){
+    constructor(client:ClientRequest<Res,Conf,Data>,interval:number, maxCountFail:number){
         this.client = client;
         this.stateMashin = new StateMashin(interval,maxCountFail);
         this.client.addOnResponce(ans => ans,this.haldingError);
