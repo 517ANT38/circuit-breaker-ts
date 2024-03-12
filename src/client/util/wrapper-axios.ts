@@ -28,7 +28,7 @@ class WrapperAxios implements WrapInterfaceAxios{
         this.wrap_axios.interceptors.request.use(onFulfilled,onRejected);
     }
 
-    addOnResponce(onFulfilled?: haldingRes, onRejected?: haldingErr): void{
+    addOnResponce(onFulfilled?: haldingRes, onRejected?: haldingErr){
         this.wrap_axios.interceptors.response.use(onFulfilled,onRejected);
     }
  
